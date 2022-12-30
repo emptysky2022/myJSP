@@ -9,7 +9,7 @@
 <body>
 <div id="wrap" align="center">
   <h1>게시글 등록</h1>
-  <form action="BoardServlet" method="post" id="frm">
+  <form action="BoardServlet" method="post" name="frm">
     <input type="hidden" name="command" value="board_write">
     <table>
       <tr>

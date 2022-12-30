@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사원 등록</title>
+<title>사원 수정</title>
 <link rel="stylesheet" type="text/css" href="css/info.css">
 </head>
 <script type="text/javascript" src="script/validation.js"></script>
@@ -12,25 +13,26 @@
 <div id="wrap">
   <h1>사원 등록</h1>
   <form action="EmployeeServlet" method="post" name="frm">
-    <input type="hidden" name="control" value="employee_insert">
+    <input type="hidden" name="control" value="employee_update">
+    <input type="hidden" name="employee_id" value="${employee.id }">
     <table>
       <tr>
         <th>아이디</th>
-        <td><input type="text" name="id" placeholder="미입력시 기본 아이디가 들어갑니다."></td>
+        <td><input type="text" name="id" value="${employee.id }"></td>
       </tr>
       <tr>
         <th>비밀번호</th>
-        <td><input type="password" name="pass" placeholder="미입력시 기본 패스워드가 들어갑니다."></td>
+        <td><input type="password" name="pass" value="${employee.pass }"></td>
       </tr>
       <tr>
         <th>이름</th>
-        <td><input type="text" name="name"></td>
+        <td><input type="text" name="name" value="${employee.name }"></td>
       </tr>
       <tr>
         <th>권한</th>
         <td>
           <label for="level"></label>
-            <select name="lev" id="level">
+            <select name="lev" id="level" value="${employee.lev }">
               <option value="">권한을 선택해주세요.</option>
               <option value="A">일반사원</option>
               <option value="B">팀장</option>
@@ -44,18 +46,26 @@
         <td>
           <fieldset style="width:200px">
             <legend>성별을 선택해주세요</legend>
-            <input type="radio" value="1" name="gender" checked>남<br>
-            <input type="radio" value="2" name="gender">여
+            <c:choose>
+	            <c:when test="${employee.gender eq '1' }">
+		            <input type="radio" value="1" name="gender" checked>남<br>
+		            <input type="radio" value="2" name="gender">여	
+		        </c:when>
+		        <c:otherwise>
+		            <input type="radio" value="1" name="gender">남<br>
+		            <input type="radio" value="2" name="gender" checked>여	
+		        </c:otherwise>
+            </c:choose>
           </fieldset>
         </td>
       </tr>
       <tr>
         <th>전화번호</th>
-        <td><input type="text" name="phone"></td>
+        <td><input type="text" name="phone" value="${employee.phone }"></td>
       </tr>
       <tr>
         <th>입사일</th>
-        <td><input type="date" name="enter"></td>
+        <td><input type="date" name="enter" value="${employee.enter }"></td>
       </tr>
     </table>
     <br><br>
